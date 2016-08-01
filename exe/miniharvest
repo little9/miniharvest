@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+require 'miniharvest'
+
+mh = MiniHarvest::MiniHarvest.new
+mh.oai_base_uri = ARGV[0]
+mh.set = ARGV[1]
+puts mh.get_records(mh.initial_request)

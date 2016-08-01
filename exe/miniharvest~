@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+mh = MiniHarvest::MiniHarvest.new
+mh.oai_base_uri = 'https://na03.alma.exlibrisgroup.com/view/oai/01UOML_INST/request'
+mh.set = 'udvd'
+refute_nil mh.get_records(mh.initial_request)

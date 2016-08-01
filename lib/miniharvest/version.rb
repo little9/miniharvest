@@ -1,3 +1,3 @@
-module Miniharvest
-  VERSION = "0.1.0"
+module MiniHarvest
+  VERSION = "0.1.3"
 end
