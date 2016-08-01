@@ -44,7 +44,8 @@ module MiniHarvest
       if resumption_token != ""
         get_records(resumption_token)
       else
-        return @@marc_collection.to_s
+        puts @@marc_collection.to_s
+        return 
       end
     end
   end
