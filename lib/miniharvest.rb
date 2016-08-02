@@ -6,13 +6,11 @@ module MiniHarvest
   require 'open-uri'
 
   class MiniHarvest 
-    
-    @@marc_collection = Nokogiri::XML('<collection xmlns="http://www.loc.gov/MARC21/slim">')
-    
-    attr_accessor :oai_base_uri, :set
+     
+    attr_accessor :oai_base_uri, :set, :from, :marc_collection
 
      def append_to_collection(records)
-      @@marc_collection.at('collection').add_child(records)
+       self.marc_collection.root.add_child(records)
     end
 
     def oai_request(uri,params)
@@ -32,7 +30,7 @@ module MiniHarvest
     end
     
     def initial_request
-      params = { :verb => 'ListRecords', :set => self.set, :metadataPrefix => 'marc21' }
+      params = { :verb => 'ListRecords', :set => self.set, :metadataPrefix => 'marc21', :from => self.from }
       res = oai_request(self.oai_base_uri,params)
       get_records(process_request(res))
     end
@@ -44,8 +42,7 @@ module MiniHarvest
       if resumption_token != ""
         get_records(resumption_token)
       else
-        puts @@marc_collection.to_s
-        return 
+        return self.marc_collection
       end
     end
   end
