@@ -2,10 +2,7 @@
 require 'miniharvest'
 require 'nokogiri'
 
-mh = MiniHarvest::MiniHarvest.new
-mh.oai_base_uri = ARGV[0]
-mh.set = ARGV[1]
-mh.from = ARGV[2]
+mh = MiniHarvest::MiniHarvest.new(ARGV[0],ARGV[1],ARGV[2])
 mh.marc_collection = Nokogiri::XML('<collection xmlns="http://www.loc.gov/MARC21/slim">')
-marc_xml = mh.get_records(mh.initial_request)
+marc_xml = mh.get_records(mh.initial_token)
 File.write(ARGV[3], marc_xml.to_xml)
