@@ -1,5 +1,7 @@
 # MiniHarvest
 
+[![Build Status](https://travis-ci.org/little9/miniharvest.svg?branch=master)](https://travis-ci.org/little9/miniharvest)
+
 MiniHarvest is used to harvest sets of MARCXML records from an OAI-PMH endpoint.The records are appended to a single MARCXML file that can be ingested with SolrMarc or other used with other sofware.
 
 ## Installation
@@ -23,8 +25,10 @@ Or install it yourself as:
 On the command line:
 
 ```bash
-miniharvest http://oai-pmh/endpoint/ setname > marc.xml
+miniharvest http://oai-pmh/endpoint/ setname 201607 marc.xml
 ```
+The first argument is the OAI-PMH endpoint, the second is the set you want to harvest, the third is a from date, and the
+last is the file to write the output to. 
 
 ## License
 
