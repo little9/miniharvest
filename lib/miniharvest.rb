@@ -59,6 +59,13 @@ module MiniHarvest
       end
     end
 
+    def dedupe_records(node)
+      seen = Hash.new(0)
+      node.traverse {|n| n.unlink if (seen[n.to_xml] += 1) > 1}
+      return node
+    end
+
+
     def get_records(token)
       params = { :verb => 'ListRecords', :resumptionToken => token[0].text }
       doc = oai_request(self.oai_base_uri,params)
@@ -67,7 +74,7 @@ module MiniHarvest
       if resumption_token != false
         get_records(resumption_token)
       else
-        return self.marc_collection.root
+        return dedupe_records(self.marc_collection.root)
       end
     end
   end
