@@ -21,7 +21,7 @@ class MiniHarvestTest < Minitest::Test
 
   def test_that_it_gets_a_resumption_token
     refute_empty(@mh.initial_token)
-  
+  end
   
   def test_that_harvests_with_resumption_token
     assert_kind_of(Nokogiri::XML::Document, @mh.marc_collection)
