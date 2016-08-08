@@ -30,6 +30,7 @@ module MiniHarvest
       
       if resumption_token != false
         get_records(resumption_token)
+        return false
       else
         return dedupe_records(self.marc_collection.root)
       end
