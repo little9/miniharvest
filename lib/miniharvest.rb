@@ -21,6 +21,20 @@ module MiniHarvest
       @initial_res = oai_request(self.oai_base_uri,params)
       @initial_token = get_resumption_token(@initial_res)
     end
+
+    def get_records(token)
+      params = { :verb => 'ListRecords', :resumptionToken => token[0].text }
+      doc = oai_request(self.oai_base_uri,params)
+      resumption_token = process_request(doc)
+      
+      if resumption_token != false
+        get_records(resumption_token)
+      else
+        return self.marc_collection.root
+      end
+    end
+
+    private # private methods
     
     def append_to_collection(records)
       self.marc_collection.root.add_child(records)
@@ -59,16 +73,6 @@ module MiniHarvest
       end
     end
 
-    def get_records(token)
-      params = { :verb => 'ListRecords', :resumptionToken => token[0].text }
-      doc = oai_request(self.oai_base_uri,params)
-      resumption_token = process_request(doc)
-      
-      if resumption_token != false
-        get_records(resumption_token)
-      else
-        return self.marc_collection.root
-      end
-    end
+    
   end
 end
