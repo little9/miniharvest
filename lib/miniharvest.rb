@@ -22,7 +22,8 @@ module MiniHarvest
       @initial_token = get_resumption_token(@initial_res)
     end
 
-    def get_records(token)
+   
+ def get_records(token)
       params = { :verb => 'ListRecords', :resumptionToken => token[0].text }
       doc = oai_request(self.oai_base_uri,params)
       resumption_token = process_request(doc)
@@ -30,10 +31,10 @@ module MiniHarvest
       if resumption_token != false
         get_records(resumption_token)
       else
-        return self.marc_collection.root
+        return dedupe_records(self.marc_collection.root)
       end
-    end
-
+ end
+ 
     private # private methods
     
     def append_to_collection(records)
@@ -73,9 +74,6 @@ module MiniHarvest
       end
     end
 
-<<<<<<< HEAD
-    
-=======
     def dedupe_records(node)
       seen = Hash.new(0)
       node.traverse {|n| n.unlink if (seen[n.to_xml] += 1) > 1}
@@ -83,17 +81,6 @@ module MiniHarvest
     end
 
 
-    def get_records(token)
-      params = { :verb => 'ListRecords', :resumptionToken => token[0].text }
-      doc = oai_request(self.oai_base_uri,params)
-      resumption_token = process_request(doc)
-      
-      if resumption_token != false
-        get_records(resumption_token)
-      else
-        return dedupe_records(self.marc_collection.root)
-      end
-    end
->>>>>>> 60aefec64147b712bb5a7da519cd66e852d9925c
+   
   end
 end
