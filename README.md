@@ -1,6 +1,6 @@
 # MiniHarvest
 
-[![Build Status](https://travis-ci.org/little9/miniharvest.svg?branch=master)](https://travis-ci.org/little9/miniharvest) [![Coverage Status](https://coveralls.io/repos/github/little9/miniharvest/badge.svg?branch=master)](https://coveralls.io/github/little9/miniharvest?branch=master)
+[![Build Status](https://travis-ci.org/little9/miniharvest.svg?branch=master)](https://travis-ci.org/little9/miniharvest) 
 
 MiniHarvest is used to harvest sets of MARCXML records from an OAI-PMH endpoint.The records are appended to a single MARCXML file that can be ingested with SolrMarc or other used with other sofware.
 
